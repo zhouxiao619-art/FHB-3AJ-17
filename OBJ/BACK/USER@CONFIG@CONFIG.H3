@@ -1,0 +1,45 @@
+#ifndef CONFIG_H_
+#define CONFIG_H_
+/*=============================
+		pa7------key1
+		pa6------key2
+		pa5------charge
+		pa4------led3
+		pa3------valve
+		pa0------key3
+		pb7------m2		
+		pb5------pump
+		pb4------m1
+		pb3------led2		
+		pb1------led1
+		pb0------charge_full		
+================================*/
+
+bit KEY1 		: PA.7;
+bit KEY2        : PA.6;
+bit KEY3        : PA.0;
+bit LED1 		: PB.1;
+bit LED2 		: PB.3;
+bit LED3		: PA.4;
+bit CHARGE 		: PA.5;
+bit MOTOR1 		: PB.4;
+bit MOTOR2 		: PB.7;
+bit CHARGE_FULL : PB.0;
+bit MOTOR3		: PB.5;		//pump
+bit MOTOR4		: PA.3;		//valve
+
+#define LED_ON	1
+#define	LED_OFF	0
+
+extern byte Power_down_flag;
+extern word LED_icnt_timer;
+extern word LED_switch_icnt;
+
+void IO_init(void);
+void Close_Hardware();
+
+#endif
+
+
+
+

@@ -1,0 +1,121 @@
+#include	"extern.h"
+#include "./USER/CONFIG/CONFIG.H"
+#include "./USER/SLEEP/SLEEP.H"
+#include "./USER/CHARGE/CHARGE.H"
+#include "./USER/ISR/ISR.H"
+#include "./USER/KEYSCAN/KEYSCAN.H"
+#include "./USER/MOTOR/MOTOR.H"
+#include "./USER/GPC/GPC.H"
+#include "./USER/LED/LED.H"
+
+void	FPPA0 (void)
+{
+	.ADJUST_IC	SYSCLK=IHRC/8, Init_RAM;	
+	IO_init();
+	nop;
+	Timer16_Init();
+	Add_sign = 1;
+	CHARGE_STEP = 0;
+
+	while(1)
+	{
+		if(!CHARGE)
+		{
+			KEY_SCAN();
+			CHARGE_STEP = 0;
+			if(Power_down_flag)
+			{
+				Measure_GPC();
+				M1_switch();
+				Special_M1_pwm();
+				M2_switch();
+				Special_M2_pwm();
+				Func_LED();
+			}
+			else
+			{
+				if((Sleep_delay == 0) && (Power_down_flag == 0) && (key_time == 0))	//into Powerdonw
+				{
+					Close_Hardware();
+					Long_click_bak = 0;
+					Long_click = 0;
+					BREATH_Switch = 0;
+					led1 = 0;
+					Power_down();
+				}
+			}
+		}
+		else CHARGE_MOD();				//charge_mode
+	}
+}
+
+void	Interrupt (void)
+{
+	pushaf;
+
+	if (Intrq.T16)
+	{	
+		STT16	Reload_T16;
+		Intrq.T16 = 0;
+		if(PWM_duty_m1)
+		{
+			if(frequency_m1 >= set_frequency_m1)
+			{
+				frequency_m1 = 0;
+				if(PWM_count_m1)PWM_count_m1--;
+			}
+		 	else frequency_m1++;
+
+		 	if(frequency_m1 <= PWM_duty_m1)
+			{
+				MOTOR1 = 1;
+			}
+			else 
+			{
+				MOTOR1 = 0; 
+			}
+		}
+		if(PWM_duty_m2)
+		{
+			if(frequency_m2 >= set_frequency_m2)
+			{
+				frequency_m2 = 0;
+				if(PWM_count_m2)PWM_count_m2--;
+			}
+		 	else frequency_m2++;
+
+		 	if(frequency_m2 <= PWM_duty_m2)
+			{
+				MOTOR2 = 1;
+			}
+			else 
+			{
+				MOTOR2 = 0; 
+			}
+		}
+
+		if(!KEY1 && !Long_click && !CHARGE)
+		{
+			key_time++;
+			if(key_time >= 20000 )Long_click = 1;
+			if(Power_down_flag == 0)Sleep_Delay = 200;
+		}
+		if(!KEY2 && !Long_click1 && !CHARGE)
+		{
+			key_time1++;
+			if(key_time1 >= 20000 )Long_click1 = 1;
+		}
+		if(!KEY3 && !Long_click2 && !CHARGE)
+		{
+			key_time2++;
+			if(key_time2 >= 20000 )Long_click2 = 1;
+		}
+
+		if(Sleep_delay)Sleep_delay--;
+		VDD_count++;
+		LED_icnt_timer++;
+		Charge_GPC_timer_icnt++;
+		BREATH_LIGHT_MOD();
+	}
+	popaf;
+}

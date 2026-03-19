@@ -1,0 +1,38 @@
+#ifndef CONFIG_H_
+#define CONFIG_H_
+
+/*============================================================================
+							PMS120(SOP-14)
+						VDD-----------------GND
+		CHARGE_FULL		PA7-----------------PA0					
+		KEY2			PA6-----------------PA4
+		CHARGE			PA5-----------------PA3			MOTOR1
+		KEY1			PB7-----------------PB3			LED3
+		KEY3			PB4-----------------PB1			LED2
+		MOTOR2			PB5-----------------PB0			LED1
+==============================================================================*/
+
+bit KEY2 		: PA.6;
+bit KEY1        : PB.7;
+bit KEY3        : PB.4;
+bit LED1 		: PB.0;
+bit LED2 		: PB.1;
+bit LED3		: PB.3;
+bit CHARGE 		: PA.5;
+bit MOTOR1 		: PA.3;
+bit MOTOR2 		: PB.5;
+bit CHARGE_FULL : PA.7;
+
+#define LED_ON	1
+#define	LED_OFF	0
+
+extern byte Power_down_flag;
+extern word LED_icnt_timer;
+extern word LED_switch_icnt;
+
+void IO_init(void);
+void Close_Hardware();
+
+#endif
+
+

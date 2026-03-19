@@ -1,0 +1,50 @@
+#include "SLEEP.H"
+#include 	"../CONFIG/CONFIG.H"
+
+/*============================================================================
+							PMS120(SOP-14)
+						VDD-----------------GND
+		CHARGE_FULL		PA7-----------------PA0					
+		KEY1			PA6-----------------PA4
+		CHARGE			PA5-----------------PA3			MOTOR1
+		KEY2			PB7-----------------PB3			LED3
+		KEY3			PB4-----------------PB1			LED2
+		MOTOR2			PB5-----------------PB0			LED1
+==============================================================================*/
+
+byte Sleep_delay;
+byte CLKMD_BK;
+
+//=======掉电模式=========
+void Power_down(void)
+{
+	//===User can add code=====
+	//进入省电模式前动作
+	//=========================
+
+	PADIER = 0b0110_0000;			//设置   唤醒IO
+	PBDIER = 0b0000_0000;
+
+	CLKMD_BK = CLKMD;
+	//休眠前需要切换低频ILRC用来防止唤醒失败
+	$ CLKMD ILRC/1,En_IHRC,En_ILRC;		//系统时钟选择，是否启用IHRC，是否启用ILRC，（En_IHRC和En_ILRC不写为停用，写为启用）
+										//系统时钟可选择IHRC/4, IHRC/16, IHRC/2, IHRC/8, ILRC/16, IHRC/32, IHRC/64, ILRC/4, ILRC/1
+										//选择系统时钟为ILRC/1，启用IHLC和IHRC；（注：两个RC振荡器至少有一个开启，否则会出现宕机）
+	CLKMD.En_IHRC = 0;					//关闭高频IHRC，若上条语句没使用低频时钟，此句必须去掉
+
+	while(1)
+	{
+		nop;
+		stopsys;						//进入断电模式
+		if((!KEY1)|| (CHARGE))break;
+	}
+
+	$ CLKMD ILRC/1,EN_IHRC,EN_ILRC;		//打开高频使能，准备切换回系统时钟
+	nop;
+
+	PADIER = 0b1100_1000;
+	PBDIER = 0b1011_1011;
+
+	CLKMD = CLKMD_BK;						//恢复休眠前的时钟
+	Sleep_delay = 200;
+}

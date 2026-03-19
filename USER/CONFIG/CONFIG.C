@@ -1,0 +1,41 @@
+#include "CONFIG.H"
+#include 	"../MOTOR/MOTOR.H"
+#include 	"../GPC/GPC.H"
+				
+/*============================================================================
+							PMS120(SOP-14)
+						VDD-----------------GND
+		CHARGE_FULL		PA7-----------------PA0					
+		KEY2			PA6-----------------PA4
+		CHARGE			PA5-----------------PA3			MOTOR1
+		KEY1			PB7-----------------PB3			LED3
+		KEY3			PB4-----------------PB1			LED1
+		MOTOR2			PB5-----------------PB0			LED2
+==============================================================================*/
+
+byte Power_down_flag;
+//word LED_icnt_timer;
+
+void IO_init(void)
+{
+	PAPH   = 0b1100_0000;
+	PAC    = 0b0000_1000;
+	PA     = 0b1100_0000;
+	PADIER = 0b1110_1000;
+
+	PBPH   = 0b1001_0000;
+	PBC    = 0b0010_1011;
+	PB     = 0b1001_0000;
+	PBDIER = 0b1011_1011;
+}
+
+void Close_Hardware()
+{
+	led1 = 0;
+	Motor_mode_m1 = 0;
+	Bak_Motor_mode_m1 = 0;
+	Motor_m1_stop();
+	Motor_mode_m2 = 0;
+	Bak_Motor_mode_m2 = 0;
+	Motor_m2_stop();
+}
