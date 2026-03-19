@@ -15,6 +15,7 @@ void	FPPA0 (void)
 	nop;
 	Timer16_Init();
 	Add_sign = 1;
+	CHARGE_STEP = 0;
 
 	while(1)
 	{
@@ -38,6 +39,7 @@ void	FPPA0 (void)
 					Close_Hardware();
 					Long_click_bak = 0;
 					Long_click = 0;
+					BREATH_Switch = 0;
 					Power_down();
 				}
 			}

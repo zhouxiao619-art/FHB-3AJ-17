@@ -135,7 +135,6 @@ void Special_M1_pwm()
 	{
 		if(mode_count_m1 == 0 && PWM_count_m1 == 0)
 		{
-			loop_m1 = 0;
 			PWM_count_m1 = 20;
 			set_frequency_m1 = 100;
 			PWM_duty_m1 = 80;
@@ -267,7 +266,6 @@ void Special_M1_pwm()
 	{
 		if(mode_count_m1 == 0 && PWM_count_m1 == 0)
 		{
-			loop_m1 = 0;
 			PWM_count_m1 = 20;
 			set_frequency_m1 = 100;
 			PWM_duty_m1 = 80;

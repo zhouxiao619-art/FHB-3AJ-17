@@ -51,17 +51,17 @@ void M1_switch()
 			break;
 		  	case 1:
 					set_frequency_m1 = 100;
-					PWM_duty_m1 = 40;
+					PWM_duty_m1 = 45;
 			break;
 
 		  	case 2:
 					set_frequency_m1 = 100;
-					PWM_duty_m1 = 60;
+					PWM_duty_m1 = 65;
 			break;
 
 		  	case 3:
 					set_frequency_m1 = 100;
-					PWM_duty_m1 = 80;
+					PWM_duty_m1 = 85;
 			break;
 
 			default:
@@ -83,7 +83,7 @@ void Special_M1_pwm()
 		}
 		else if(mode_count_m1 == 1 && PWM_count_m1 == 0)
 		{
-			if(PWM_duty_m1<560)
+			if(PWM_duty_m1<588)
 			{
 				PWM_count_m1 = 1;
 				PWM_duty_m1 +=14;
@@ -101,7 +101,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 40;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 1;
 		}
 		else if(mode_count_m1 == 1 && PWM_count_m1 == 0)
@@ -119,7 +119,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 20;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 1;
 		}
 		else if(mode_count_m1 == 1 && PWM_count_m1 == 0)
@@ -137,7 +137,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 20;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 1;
 		}
 		else if(mode_count_m1 == 1 && PWM_count_m1 == 0)
@@ -157,7 +157,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 100;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 3;
 		}
 		else if(mode_count_m1 == 3 && PWM_count_m1 == 0)
@@ -175,7 +175,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 60;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 1;
 		}
 		else if(mode_count_m1 == 1 && PWM_count_m1 == 0)
@@ -189,7 +189,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 100;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 3;
 		}
 		else if(mode_count_m1 == 3 && PWM_count_m1 == 0)
@@ -203,7 +203,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 150;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 5;
 		}
 		else if(mode_count_m1 == 5 && PWM_count_m1 == 0)
@@ -217,7 +217,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 200;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 7;
 		}
 		else if(mode_count_m1 == 7 && PWM_count_m1 == 0)
@@ -251,7 +251,7 @@ void Special_M1_pwm()
 			PWM_count_m1 = 40;
 			mode_count_m1 = 3;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 		}
 		else if(mode_count_m1 == 3 && PWM_count_m1 == 0)
 		{
@@ -268,7 +268,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 20;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 1;
 		}
 		else if(mode_count_m1 == 1 && PWM_count_m1 == 0)
@@ -288,7 +288,7 @@ void Special_M1_pwm()
 		{
 			PWM_count_m1 = 150;
 			set_frequency_m1 = 100;
-			PWM_duty_m1 = 80;
+			PWM_duty_m1 = 85;
 			mode_count_m1 = 3;
 		}
 		else if(mode_count_m1 == 3 && PWM_count_m1 == 0)

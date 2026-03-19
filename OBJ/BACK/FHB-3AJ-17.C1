@@ -8,6 +8,8 @@
 #include "./USER/GPC/GPC.H"
 #include "./USER/LED/LED.H"
 
+//   version 3.4
+
 void	FPPA0 (void)
 {
 	.ADJUST_IC	SYSCLK=IHRC/8, Init_RAM;	
@@ -40,6 +42,7 @@ void	FPPA0 (void)
 					Long_click_bak = 0;
 					Long_click = 0;
 					BREATH_Switch = 0;
+					led1 = 0;
 					Power_down();
 				}
 			}
