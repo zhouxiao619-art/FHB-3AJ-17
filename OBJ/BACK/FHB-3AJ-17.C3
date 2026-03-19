@@ -40,6 +40,7 @@ void	FPPA0 (void)
 					Long_click_bak = 0;
 					Long_click = 0;
 					BREATH_Switch = 0;
+					led1 = 0;
 					Power_down();
 				}
 			}
