@@ -10,6 +10,8 @@
 
 //   version 3.4  2026.3.19.08µã58·Ö
 
+//   test
+
 void	FPPA0 (void)
 {
 	.ADJUST_IC	SYSCLK=IHRC/8, Init_RAM;	
